@@ -10,6 +10,7 @@ export default function CartItem({
   price,
   count,
 }) {
+  let totalPrice = useSelector((state) => state.totalPrice);
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const handlePlus = (e) => {
@@ -20,6 +21,7 @@ export default function CartItem({
       const newCart = [...cart];
       newCart[index].count += 1;
       dispatch({ type: "cart/update", payload: newCart });
+      localStorage.setItem("cart", JSON.stringify(newCart));
     }
   };
   const handleMinus = (e) => {
@@ -31,6 +33,7 @@ export default function CartItem({
         const newCart = [...cart];
         newCart[index].count -= 1;
         dispatch({ type: "cart/update", payload: newCart });
+        localStorage.setItem("cart", JSON.stringify(newCart));
       }
     }
   };

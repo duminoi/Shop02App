@@ -5,6 +5,7 @@ export const initialState = {
   cart: JSON.parse(localStorage.getItem("cart")) || [],
   count: 0,
   toastContent: "idle",
+  totalPrice: 0,
 };
 export const reducer = (state, action) => {
   switch (action.type) {
@@ -24,6 +25,8 @@ export const reducer = (state, action) => {
       return { ...state, count: state.count - 1 };
     case "toast":
       return { ...state, toastContent: action.payload };
+    case "totalPrice":
+      return { ...state, totalPrice: state.totalPrice + action.payload };
     default:
       return state;
   }

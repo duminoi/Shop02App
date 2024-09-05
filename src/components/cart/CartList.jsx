@@ -1,13 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../../assets/css/cart/cart.css";
 import CartItem from "./CartItem";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useSelector } from "../../store/hook";
+import { useDispatch, useSelector } from "../../store/hook";
+// import { useSelector } from "../../store/hook";
 export default function CartList() {
-  const totalPrice = 24323423;
+  const totalPrice = useSelector((state) => state.totalPrice);
+  const dispatch = useDispatch();
   // const cart = useSelector((state) => state.cart);
-  const cart = JSON.parse(localStorage.getItem("cart"));
-  // useEffect(() => {}, [cart]);
+  let cart = JSON.parse(localStorage.getItem("cart"));
+  // cart.forEach(({ price, count }) =>
+  //   dispatch({ type: "totalPrice", payload: price * count })
+  // );
+  // useEffect(() => {
+
+  // }, [cart]);
   return (
     <div>
       <div className="mt-[6rem] mb-11 flex justify-center flex-col items-center">
