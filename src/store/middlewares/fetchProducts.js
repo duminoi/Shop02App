@@ -6,7 +6,9 @@ export const fetchProducts = () => {
     // console.log(apiUrl);
     try {
       dispatch({ type: "loading", payload: true });
-      const response = await axios.get(`${apiUrl}/products`);
+      const response = await axios.get(
+        `https://api-exercise-sopi.vercel.app/api/v1/products`
+      );
       if (response.data.status_code != "SUCCESS") {
         throw new Error();
       }
