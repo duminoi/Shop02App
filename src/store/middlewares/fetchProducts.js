@@ -2,7 +2,7 @@ import axios from "axios";
 // import config from "../../../config.js";
 export const fetchProducts = () => {
   return async (dispatch) => {
-    const { apiUrl } = config;
+    // const { apiUrl } = config;
     // console.log(apiUrl);
     try {
       dispatch({ type: "loading", payload: true });
