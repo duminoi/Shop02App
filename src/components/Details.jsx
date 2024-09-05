@@ -5,6 +5,8 @@ import accounting from "accounting";
 import { useNavigate } from "react-router-dom";
 export default function Details() {
   const detail = useSelector((state) => state.details);
+  console.log("vào details");
+
   const dispatch = useDispatch();
   console.log(detail);
   const navigate = useNavigate();

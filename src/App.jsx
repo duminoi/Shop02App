@@ -12,23 +12,12 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function App() {
+  console.log("vào App");
   const detail = useSelector((state) => state.details);
-  const toastContent = useSelector((state) => state.toastContent);
-  const dispatch = useDispatch();
-  console.log(toastContent);
-
   const isLoading = useSelector((state) => {
     return state.isLoading;
   });
 
-  useEffect(() => {
-    console.log("toast thay đổi", toastContent);
-
-    if (toastContent != "idle") {
-      toast(toastContent);
-      // dispatch({ type: "toastContent", payload: "idle" });
-    }
-  }, [toastContent]);
   return (
     <div>
       <ToastContainer position="top-center" />
