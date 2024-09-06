@@ -10,6 +10,7 @@ import Loading from "./components/Loading";
 import Errors from "./pages/Errors";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Counter from "./components/Counter";
 
 export default function App() {
   console.log("vào App");
@@ -17,11 +18,11 @@ export default function App() {
   const isLoading = useSelector((state) => {
     return state.isLoading;
   });
-
   return (
     <div>
       <ToastContainer position="top-center" />
       <Header />
+      {/* <Counter /> */}
       <Routes>
         <Route path="/" element={<ProductList />} />
         <Route path="/cart" element={<CartList />} />

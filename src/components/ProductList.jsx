@@ -6,7 +6,7 @@ import { useSelector } from "../store/hook";
 export default function ProductList() {
   const dispatch = useDispatch();
   const productList = useSelector((state) => state.productList);
-  // console.log(productList);
+  console.log("vào productList");
   useEffect(() => {
     dispatch(fetchProducts());
   }, []);

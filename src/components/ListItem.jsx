@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 export default function ListItem({ _id, name, price, image }) {
   // const detail = useSelector((state) => state.details);
   console.log("vào listItem");
-
   const productList = useSelector((state) => state.productList);
   const cart = useSelector((state) => state.cart);
   // console.log(cart);
@@ -53,8 +52,7 @@ export default function ListItem({ _id, name, price, image }) {
     console.log(index);
   };
   useEffect(() => {
-    console.log("vào listItem");
-
+    // console.log("vào listItem");
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
