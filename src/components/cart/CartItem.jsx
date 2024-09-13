@@ -30,8 +30,11 @@ export default function CartItem({
     console.log("index", index);
 
     if (index >= 0) {
+      // nếu mà sản phẩm được click có trong giỏ hàng
       if (cart[index].count >= 1) {
+        // giảm số lượng khi count > 1
         if (cart[index].count == 1) {
+          // nếu count = 1 thì sẽ xóa sản phẩm đó khỏi giỏ hàng
           const newCart = cart.filter((item) => {
             return item._id !== id;
           });
