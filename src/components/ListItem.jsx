@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "../store/hook";
+import { useDispatch } from "react-redux";
 import accounting from "accounting";
 import { json, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 export default function ListItem({ _id, name, price, image }) {
   // const detail = useSelector((state) => state.details);
   console.log("vào listItem");
@@ -36,15 +37,11 @@ export default function ListItem({ _id, name, price, image }) {
           const newCart = { ...item, count: 1 };
           console.log(newCart);
           dispatch({ type: "cart/add", payload: newCart });
-          // dispatch({ type: "toastContent", payload: "idle" });
-          // dispatch({ type: "toast", payload: `${item.name} is added` });
           toast(`${item.name} is added`);
         } else {
           const newCart = [...cart];
           newCart[index].count += 1;
           localStorage.setItem("cart", JSON.stringify(newCart));
-          // dispatch({ type: "toastContent", payload: "idle" });
-          // dispatch({ type: "toast", payload: `${item.name} is added` });
           toast(`${item.name} is added`);
         }
       }

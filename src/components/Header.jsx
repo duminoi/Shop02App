@@ -1,7 +1,7 @@
 import React from "react";
 import img01 from "../assets/img/icon.png";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { useSelector } from "../store/hook";
+import { useSelector } from "react-redux";
 export default function Header() {
   const cart = useSelector((state) => state.cart);
   const navigate = useNavigate();

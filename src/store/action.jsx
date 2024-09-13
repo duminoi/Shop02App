@@ -1,0 +1,1 @@
+// const fetchProducts = "products/getProducts";

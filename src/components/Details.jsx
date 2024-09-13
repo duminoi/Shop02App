@@ -1,6 +1,6 @@
 import React from "react";
 import "../assets/css/details.css";
-import { useDispatch, useSelector } from "../store/hook";
+import { useDispatch, useSelector } from "react-redux";
 import accounting from "accounting";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";

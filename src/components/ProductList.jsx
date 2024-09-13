@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import ListItem from "./ListItem";
-import { useDispatch } from "../store/hook";
+import { useDispatch } from "react-redux";
 import { fetchProducts } from "../store/middlewares/fetchProducts";
-import { useSelector } from "../store/hook";
+import { useSelector } from "react-redux";
 export default function ProductList() {
   const dispatch = useDispatch();
   const productList = useSelector((state) => state.productList);

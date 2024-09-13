@@ -2,15 +2,17 @@ import React, { useEffect, useState, useRef } from "react";
 import "../../assets/css/cart/cart.css";
 import CartItem from "./CartItem";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useDispatch, useSelector } from "../../store/hook";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import accounting from "accounting";
 // import { useSelector } from "../../store/hook";
 export default function CartList() {
   let totalPrice = 0;
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  let cart = JSON.parse(localStorage.getItem("cart"));
+
+  let cart = useSelector((state) => state.cart);
   console.log(cart);
   console.log("vào cartList");
   cart.forEach(({ price, count }) => {
@@ -19,16 +21,15 @@ export default function CartList() {
   });
   const handleDelete = () => {
     cart = [];
-    localStorage.setItem("cart", JSON.stringify(cart));
     toast("Checkout is completed");
     dispatch({ type: "cart/update", payload: cart });
   };
   const handleNavigate = () => {
     navigate("/");
   };
-  // useEffect(() => {
-  //   // dispatch({ type: "cart/update", payload: cart });
-  // }, [cart]);
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
   return (
     <div>
       <div className="mt-[6rem] mb-11 flex justify-center flex-col items-center">
@@ -42,7 +43,7 @@ export default function CartList() {
           <div id="total-price-div">
             <span id="left">Total Price: </span>
             <span id="dolar">$</span>
-            <span id="right">{totalPrice}</span>
+            <span id="right"> {accounting.formatMoney(totalPrice, "", 0)}</span>
           </div>
         ) : (
           <div className="text-4xl mb-5">

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "../../store/hook";
-
+import { useDispatch, useSelector } from "react-redux";
+import accounting from "accounting";
 export default function CartItem({
   _id,
   brand,
@@ -12,33 +12,37 @@ export default function CartItem({
 }) {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
-  // let totalPrice = useRef(0);
-  // cart.forEach(({ price, count }) => {
-  //   totalPrice = price * count;
-  // });
-  // console.log("price", price);
-  // console.log("count", count);
+
   const handlePlus = (e) => {
     const id = e.target.dataset.id;
-    // console.log(id);
+    console.log(id);
     const index = cart.findIndex((item) => item._id === id);
     if (index >= 0) {
       const newCart = [...cart];
       newCart[index].count += 1;
       dispatch({ type: "cart/update", payload: newCart });
-      localStorage.setItem("cart", JSON.stringify(newCart));
     }
   };
   const handleMinus = (e) => {
     const id = e.target.dataset.id;
     console.log(id);
     const index = cart.findIndex((item) => item._id === id);
+    console.log("index", index);
+
     if (index >= 0) {
       if (cart[index].count >= 1) {
+        if (cart[index].count == 1) {
+          const newCart = cart.filter((item) => {
+            return item._id !== id;
+          });
+          dispatch({ type: "cart/update", payload: newCart });
+          console.log("vào đây");
+          return;
+        }
         const newCart = [...cart];
         newCart[index].count -= 1;
+        console.log(newCart[index].count);
         dispatch({ type: "cart/update", payload: newCart });
-        localStorage.setItem("cart", JSON.stringify(newCart));
       }
     }
   };
@@ -66,7 +70,7 @@ export default function CartItem({
         </div>
         <p className="price text-[1.6rem] font-[500] ">
           <span className="text-[#9d174d]">$</span>
-          {price}
+          {accounting.formatMoney(price, "", 0)}
         </p>
         <p>Còn lại: {quantity - count}</p>
       </div>
@@ -86,7 +90,10 @@ export default function CartItem({
       </div>
       <div id="price">
         <span id="dolar-span">$</span>
-        <span id="price-span">{price * count}</span>
+        <span id="price-span">
+          {" "}
+          {accounting.formatMoney(price * count, "", 0)}
+        </span>
         <span data-id={_id} onClick={handleDelete} id="trash-icon">
           <svg
             data-id={_id}

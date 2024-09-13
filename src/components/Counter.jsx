@@ -1,6 +1,5 @@
 // import React from "react";
-import { useDispatch, useSelector } from "../store/hook";
-
+import { useDispatch, useSelector } from "react-redux";
 export default function Counter() {
   const count = useSelector((state) => state.count);
   console.log("vào Counter");

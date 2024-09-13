@@ -15,7 +15,7 @@ export const fetchProducts = () => {
       const { data } = response.data;
       const { listProduct } = data;
       //   console.log(response);
-      //   console.log(listProduct);
+      // console.log(listProduct);
       dispatch({ type: "loading", payload: false });
       dispatch({ type: "products/get", payload: listProduct });
     } catch (e) {

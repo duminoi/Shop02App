@@ -1,3 +1,6 @@
+import { applyMiddleware, createStore } from "redux";
+import { thunk } from "redux-thunk";
+
 export const initialState = {
   isLoading: false,
   productList: [],
@@ -31,3 +34,5 @@ export const reducer = (state, action) => {
       return state;
   }
 };
+
+export const store = createStore(reducer, initialState, applyMiddleware(thunk));
