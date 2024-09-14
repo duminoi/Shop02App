@@ -13,8 +13,8 @@ export default function CartList() {
   const navigate = useNavigate();
 
   let cart = useSelector((state) => state.cart);
-  console.log(cart);
-  console.log("vào cartList");
+  // console.log(cart);
+  // // console.log("vào cartList");
   cart.forEach(({ price, count }) => {
     totalPrice += price * count;
     // console.log("totalPrice", totalPrice);

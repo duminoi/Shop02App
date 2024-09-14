@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import accounting from "accounting";
+import { Bounce, toast } from "react-toastify";
+import "react-confirm-alert/src/react-confirm-alert.css";
 export default function CartItem({
   _id,
   brand,
@@ -15,7 +17,6 @@ export default function CartItem({
 
   const handlePlus = (e) => {
     const id = e.target.dataset.id;
-    console.log(id);
     const index = cart.findIndex((item) => item._id === id);
     if (index >= 0) {
       const newCart = [...cart];
@@ -25,35 +26,50 @@ export default function CartItem({
   };
   const handleMinus = (e) => {
     const id = e.target.dataset.id;
-    console.log(id);
     const index = cart.findIndex((item) => item._id === id);
-    console.log("index", index);
-
     if (index >= 0) {
-      // nếu mà sản phẩm được click có trong giỏ hàng
+      // nếu mà sản phẩm được click đã có trong giỏ hàng
       if (cart[index].count >= 1) {
         // giảm số lượng khi count > 1
         if (cart[index].count == 1) {
-          // nếu count = 1 thì sẽ xóa sản phẩm đó khỏi giỏ hàng
-          const newCart = cart.filter((item) => {
-            return item._id !== id;
-          });
-          dispatch({ type: "cart/update", payload: newCart });
+          // nếu count = 1 thì sẽ xóa sản phẩm đó khỏi giỏ hàng(khi bấm sẽ trở về 0)
+          onDelete(e);
           console.log("vào đây");
           return;
         }
         const newCart = [...cart];
         newCart[index].count -= 1;
-        console.log(newCart[index].count);
         dispatch({ type: "cart/update", payload: newCart });
       }
     }
   };
+  const onDelete = (e) => {
+    toast(
+      <div
+        onClick={() => {
+          handleDelete(e);
+        }}
+      >
+        Are your sure to delete this product?if yes, click me!!!
+      </div>,
+      {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      }
+    );
+  };
+
   const handleDelete = (e) => {
     const id = e.target.dataset.id;
     console.log(id);
     const newCart = cart.filter(({ _id }) => _id !== id);
-    localStorage.setItem("cart", JSON.stringify(newCart));
     dispatch({ type: "cart/update", payload: newCart });
   };
   useEffect(() => {
@@ -97,7 +113,7 @@ export default function CartItem({
           {" "}
           {accounting.formatMoney(price * count, "", 0)}
         </span>
-        <span data-id={_id} onClick={handleDelete} id="trash-icon">
+        <span data-id={_id} onClick={onDelete} id="trash-icon">
           <svg
             data-id={_id}
             stroke="currentColor"

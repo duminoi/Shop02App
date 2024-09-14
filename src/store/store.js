@@ -9,6 +9,7 @@ export const initialState = {
   count: 0,
   toastContent: "idle",
   totalPrice: 0,
+  totalPages: 0,
 };
 export const reducer = (state, action) => {
   switch (action.type) {
@@ -30,6 +31,8 @@ export const reducer = (state, action) => {
       return { ...state, toastContent: action.payload };
     case "totalPrice":
       return { ...state, totalPrice: state.totalPrice + action.payload };
+    case "totalPages":
+      return { ...state, totalPages: action.payload };
     default:
       return state;
   }

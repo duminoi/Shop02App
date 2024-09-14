@@ -28,15 +28,11 @@ export default function Details() {
           const newCart = { ...item, count: 1 };
           console.log(newCart);
           dispatch({ type: "cart/add", payload: newCart });
-          // dispatch({ type: "toastContent", payload: "idle" });
-          // dispatch({ type: "toast", payload: `${item.name} is added` });
           toast(`${item.name} is added`);
         } else {
           const newCart = [...cart];
           newCart[index].count += 1;
           localStorage.setItem("cart", JSON.stringify(newCart));
-          // dispatch({ type: "toastContent", payload: "idle" });
-          // dispatch({ type: "toast", payload: `${item.name} is added` });
           toast(`${item.name} is added`);
         }
       }
