@@ -4,19 +4,28 @@ import { useDispatch } from "react-redux";
 import { fetchProducts } from "../store/middlewares/fetchProducts";
 import { useSelector } from "react-redux";
 import ReactPaginate from "react-paginate";
+import { useParams } from "react-router-dom";
 export default function ProductList() {
   const dispatch = useDispatch();
   const productList = useSelector((state) => state.productList);
   // console.log("vào productList");
   const totalPages = useSelector((state) => state.totalPages);
+  const { id } = useParams();
+  console.log(id);
 
   const handlePageClick = ({ selected }) => {
     dispatch(fetchProducts(selected + 1));
+    dispatch({ type: "page", payload: selected + 1 });
   };
 
   useEffect(() => {
     dispatch(fetchProducts(1));
   }, []);
+
+  useEffect(() => {
+    dispatch(fetchProducts(id));
+    dispatch({ type: "page", payload: id });
+  }, [id]);
   return (
     <div className="flex-col justify-content flex items-center mt-[5rem]">
       <h1 className="mx-auto text-4xl font-[600] py-[2rem]">PRODUCTS</h1>

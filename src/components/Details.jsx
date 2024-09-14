@@ -9,11 +9,12 @@ export default function Details() {
   console.log("vào details");
   const cart = useSelector((state) => state.cart);
   const productList = useSelector((state) => state.productList);
+  const page = useSelector((state) => state.page);
   const dispatch = useDispatch();
   console.log(detail);
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate("/");
+    navigate(`/products/page/${page}`);
   };
   const handleCart = (e) => {
     const id = detail._id;

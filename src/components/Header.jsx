@@ -1,13 +1,14 @@
 import React from "react";
 import img01 from "../assets/img/icon.png";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useStore } from "react-redux";
 export default function Header() {
   const cart = useSelector((state) => state.cart);
   const navigate = useNavigate();
+  const page = useSelector((state) => state.page);
   const handlClick = () => {
     console.log("vào header");
-    navigate("/");
+    navigate(`/products/page/${page}`);
   };
   return (
     <div className="bg-[#252b48] fixed top-0 left-0 w-full h-[5rem] z-[99]">

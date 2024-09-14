@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import accounting from "accounting";
 // import { useSelector } from "../../store/hook";
 export default function CartList() {
+  const page = useSelector((state) => state.page);
   let totalPrice = 0;
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ export default function CartList() {
     dispatch({ type: "cart/update", payload: cart });
   };
   const handleNavigate = () => {
-    navigate("/");
+    navigate(`/products/page/${page}`);
   };
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
